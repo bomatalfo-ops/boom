@@ -50,7 +50,7 @@ const App = () => {
     audio.loop = true;
     audio.volume = 0.3;
     audio.preload = 'auto';
-
+    
     // Add event listeners
     const handleCanPlay = () => {
       console.log('Audio can play');
@@ -58,19 +58,19 @@ const App = () => {
       globalAudio = audio;
       audioInitialized = true;
     };
-
+    
     const handleError = (e: any) => {
       console.log('Audio error:', e);
       console.log('Audio src:', audioFile);
     };
-
+    
     audio.addEventListener('canplay', handleCanPlay);
     audio.addEventListener('error', handleError);
-
+    
     // Try to load the audio
     audio.load();
     audioRef.current = audio;
-
+    
     return () => {
       audio.removeEventListener('canplay', handleCanPlay);
       audio.removeEventListener('error', handleError);
@@ -89,9 +89,9 @@ const App = () => {
         return;
       }
     };
-
+    
     document.addEventListener('click', enableAudio, { once: true });
-
+    
     return () => {
       document.removeEventListener('click', enableAudio);
     };
@@ -100,9 +100,9 @@ const App = () => {
   // Play/pause audio based on modal visibility
   useEffect(() => {
     const anyModalShown = showScanner || showModal || showMainDialog || showBackgroundModals.some(Boolean) || showTopOverlay;
-
+    
     console.log('Modal shown:', anyModalShown, 'Audio ready:', audioReady);
-
+    
     if (anyModalShown && globalAudio && audioReady) {
       const playPromise = globalAudio.play();
       if (playPromise !== undefined) {
@@ -129,7 +129,7 @@ const App = () => {
       const timer2 = setTimeout(() => {
         setShowTopOverlay(true);
       }, 5000);
-
+      
       return () => {
         clearTimeout(timer1);
         clearTimeout(timer2);
@@ -159,7 +159,7 @@ const App = () => {
           return prev + 4;
         });
       }, 30);
-
+      
       return () => clearInterval(interval);
     }
   }, [showScanner]);
@@ -176,8 +176,8 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        
-        {/* <Dialog open={showScanner}>
+        {/* scanner dialog */}
+        <Dialog open={showScanner}>
           <DialogContent className="max-w-[500px] bg-white border border-gray-300 shadow-xl" style={{ backgroundColor: 'white' }}>
             <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 -m-6 mb-4">
               <div className="flex items-center gap-3">
@@ -188,7 +188,7 @@ const App = () => {
                 </div>
               </div>
             </div>
-
+            
             <div className="space-y-4">
               <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
                 <img className="w-6 h-6 animate-spin" src={img4} alt="Scanning" />
@@ -198,10 +198,10 @@ const App = () => {
                 </div>
                 <span className="text-sm font-bold text-blue-600">{scannerProgress}%</span>
               </div>
-
+              
               <div className="space-y-2">
                 <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
-                  <div
+                  <div 
                     className="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full transition-all duration-200 ease-linear"
                     style={{ width: `${scannerProgress}%` }}
                   />
@@ -211,7 +211,7 @@ const App = () => {
                   <span>Threats found: 1</span>
                 </div>
               </div>
-
+              
               <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
                 <div className="flex items-start gap-2">
                   <div className="w-2 h-2 bg-yellow-500 rounded-full mt-1"></div>
@@ -221,13 +221,13 @@ const App = () => {
                   </div>
                 </div>
               </div>
-
+              
               <div className="text-center text-xs text-gray-500 space-y-1">
                 <p>Windows Defender is protecting your PC</p>
                 <p>Scan will complete shortly...</p>
               </div>
             </div>
-
+            
             <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-200">
               <img className="w-10 opacity-60" src={img2} alt="Microsoft" />
               <button className="text-xs text-gray-500 hover:text-gray-700">Cancel scan</button>
@@ -235,7 +235,7 @@ const App = () => {
           </DialogContent>
         </Dialog>
 
-        
+        {/* Top Overlay Dialog */}
         <Dialog open={showTopOverlay}>
           <DialogContent className="fixed top-10 w-full rounded-none border-0 bg-black text-white p-3 text-center z-[150]" style={{ backgroundColor: 'black' }}>
             <div className="flex flex-col items-center justify-center">
@@ -247,7 +247,7 @@ const App = () => {
           </DialogContent>
         </Dialog>
 
-        
+        {/* blue background dialog */}
         <Dialog open={showModal}>
           <DialogContent className="max-w-[550px] h-[550px] border-0 rounded-none" style={{ backgroundColor: '#1873e8' }}>
             <div className="w-full h-full flex items-center justify-center rounded-none">
@@ -290,7 +290,7 @@ const App = () => {
           </DialogContent>
         </Dialog>
 
-        
+        {/* main dialog */}
         <Dialog open={showMainDialog}>
           <DialogContent className="max-w-[400px]" style={{ backgroundColor: 'white' }}>
             <DialogHeader>
@@ -340,7 +340,7 @@ const App = () => {
           </DialogContent>
         </Dialog>
 
-        
+        {/* Background modals for cool effect */}
         <Dialog open={showBackgroundModals[0]}>
           <DialogContent className="max-w-[500px] bg-blue-900/95 backdrop-blur-sm border border-blue-700 rounded-lg shadow-2xl" style={{ backgroundColor: 'rgba(30, 58, 138, 0.95)' }}>
             <div className="text-white space-y-4">
@@ -353,7 +353,7 @@ const App = () => {
                   <p className="text-xs text-blue-300">Threat Level: SEVERE</p>
                 </div>
               </div>
-
+              
               <div className="bg-blue-800/50 p-3 rounded border border-blue-600">
                 <p className="text-sm font-bold mb-2">Malware Detected:</p>
                 <p className="text-xs mb-1">• Trojan.GenericKD.456789</p>
@@ -361,7 +361,7 @@ const App = () => {
                 <p className="text-xs mb-1">• Worm.Win32.AutoRun.aaa</p>
                 <p className="text-xs">• Spyware.Keylogger.Flux</p>
               </div>
-
+              
               <div className="space-y-2">
                 <p className="text-sm font-bold">System Files Compromised:</p>
                 <div className="text-xs space-y-1">
@@ -372,12 +372,12 @@ const App = () => {
                   <p> C:\Users\%USER%\Documents\*.doc - ENCRYPTED</p>
                 </div>
               </div>
-
+              
               <div className="bg-[#1873e8]/50 p-2 rounded border border-[#1873e8]/70">
                 <p className="text-xs font-bold text-white">⚠ IMMEDIATE ACTION REQUIRED ⚠</p>
                 <p className="text-xs">System will restart in 2:00 minutes</p>
               </div>
-
+              
               <div className="flex gap-2">
                 <button className="flex-1 bg-[#1873e8] text-white px-4 py-2 rounded text-sm font-bold hover:bg-[#1e5fc7]">REMOVE ALL</button>
                 <button className="flex-1 bg-blue-700 text-white px-4 py-2 rounded text-sm hover:bg-blue-600">QUARANTINE</button>
@@ -396,7 +396,7 @@ const App = () => {
                   <p className="text-xs text-blue-300">Multiple Intrusions Detected</p>
                 </div>
               </div>
-
+              
               <div className="space-y-3">
                 <div className="bg-[#1873e8]/50 p-3 rounded">
                   <p className="text-sm font-bold mb-2">Unauthorized Access Attempts:</p>
@@ -407,7 +407,7 @@ const App = () => {
                     <p> IP: 203.0.113.1 - PORT: 3389 - RDP HACKING</p>
                   </div>
                 </div>
-
+                
                 <div className="bg-[#1873e8]/50 p-3 rounded border border-[#1873e8]/70">
                   <p className="text-sm font-bold text-white">Data Exfiltration Detected:</p>
                   <div className="text-xs space-y-1">
@@ -417,7 +417,7 @@ const App = () => {
                     <p> Speed: 1.2 MB/s (Ongoing)</p>
                   </div>
                 </div>
-
+                
                 <div className="space-y-2">
                   <p className="text-sm font-bold">Firewall Status:</p>
                   <div className="text-xs space-y-1">
@@ -428,7 +428,7 @@ const App = () => {
                   </div>
                 </div>
               </div>
-
+              
               <div className="bg-[#1873e8]/50 p-2 rounded border border-[#1873e8]/70 animate-pulse">
                 <p className="text-xs font-bold text-white">⚠ NETWORK ISOLATION RECOMMENDED ⚠</p>
               </div>
@@ -448,7 +448,7 @@ const App = () => {
                   <p className="text-xs text-blue-300">Critical Information Compromised</p>
                 </div>
               </div>
-
+              
               <div className="space-y-3">
                 <div className="bg-[#1873e8]/50 p-3 rounded">
                   <p className="text-sm font-bold mb-2">Personal Data Stolen:</p>
@@ -460,7 +460,7 @@ const App = () => {
                     <p> ID Documents: Passport, Driver's License copied</p>
                   </div>
                 </div>
-
+                
                 <div className="bg-[#1873e8]/50 p-3 rounded border border-[#1873e8]/70">
                   <p className="text-sm font-bold text-white mb-2">Active Data Theft:</p>
                   <div className="text-xs space-y-1">
@@ -471,7 +471,7 @@ const App = () => {
                     <p> Progress: 67% complete - 3:24 remaining</p>
                   </div>
                 </div>
-
+                
                 <div className="space-y-2">
                   <p className="text-sm font-bold">System Vulnerabilities:</p>
                   <div className="text-xs space-y-1">
@@ -482,7 +482,7 @@ const App = () => {
                     <p> Hardware: BIOS firmware corrupted</p>
                   </div>
                 </div>
-
+                
                 <div className="bg-[#1873e8]/50 p-3 rounded border border-[#1873e8]/70">
                   <p className="text-sm font-bold text-white">Remote Access Active:</p>
                   <div className="text-xs space-y-1">
@@ -494,7 +494,7 @@ const App = () => {
                   </div>
                 </div>
               </div>
-
+              
               <div className="bg-[#1873e8]/50 p-3 rounded border border-[#1873e8]/70 animate-pulse">
                 <p className="text-xs font-bold text-white text-center">⚠️ IMMEDIATE EMERGENCY RESPONSE REQUIRED ⚠️</p>
                 <p className="text-xs text-center">Call Microsoft Support: +1-888-203-0975</p>
@@ -504,20 +504,20 @@ const App = () => {
         </Dialog>
 
         {showBottomText && (
-          <div className="fixed flex-col bottom-0 left-0 w-screen bg-[#1873e8] text-white flex justify-center items-center z-[100] py-1">
-            <div className="flex items-center justify-center gap-10 py-1">
-              <img className="w-20" src={img5} alt="" />
-              <h2 className="new-font">Contact Support 1-8702288568 (Toll Free)</h2>
-            </div>
-            <p className=" text-xs px-2">
-              Warning! An unrecognized app from starting. Running this app might
-              put your PC at risk. Windows Defender SmartScreen has found
-              potentially unwanted Adware on this device that can steal your
-              passwords, online identity, financial information, personal files,
-              pictures or documents.
-            </p>
+        <div className="fixed flex-col bottom-0 left-0 w-screen bg-[#1873e8] text-white flex justify-center items-center z-[100] py-1">
+          <div className="flex items-center justify-center gap-10 py-1">
+            <img className="w-20" src={img5} alt="" />
+            <h2 className="new-font">Contact Support 1-8702288568 (Toll Free)</h2>
           </div>
-        )} */}
+          <p className=" text-xs px-2">
+            Warning! An unrecognized app from starting. Running this app might
+            put your PC at risk. Windows Defender SmartScreen has found
+            potentially unwanted Adware on this device that can steal your
+            passwords, online identity, financial information, personal files,
+            pictures or documents.
+          </p>
+        </div>
+        )}
 
         <BrowserRouter>
           <Routes>
