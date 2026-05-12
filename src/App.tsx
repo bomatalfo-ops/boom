@@ -177,7 +177,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         
-        {/* <Dialog open={showScanner}>
+        <Dialog open={showScanner}>
           <DialogContent className="max-w-[500px] bg-white border border-gray-300 shadow-xl" style={{ backgroundColor: 'white' }}>
             <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 -m-6 mb-4">
               <div className="flex items-center gap-3">
@@ -517,7 +517,7 @@ const App = () => {
               pictures or documents.
             </p>
           </div>
-        )} */}
+        )}
 
         <BrowserRouter>
           <Routes>
