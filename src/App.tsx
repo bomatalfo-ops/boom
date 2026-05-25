@@ -124,7 +124,7 @@ const App = () => {
       const timer1 = setTimeout(() => {
         setShowScanner(true);
         setShowBottomText(true);
-      }, 2000);
+      }, 5000);
 
       const timer2 = setTimeout(() => {
         setShowTopOverlay(true);
