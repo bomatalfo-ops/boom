@@ -317,7 +317,7 @@ const App = () => {
                   <p className="text-blue-700 font-medium text-sm space-y-2">
                     Contact Windows Support :
                     <span className="ml-2 inline-block px-2 py-0.5 border border-gray-300 rounded bg-gray-50 text-gray-800">
-                      1833 6249 802 (Security Helpline)
+                      (813) 317-1106 (Security Helpline)
                     </span>
                   </p>
                 </div>
@@ -497,7 +497,7 @@ const App = () => {
 
               <div className="bg-[#1873e8]/50 p-3 rounded border border-[#1873e8]/70 animate-pulse">
                 <p className="text-xs font-bold text-white text-center">⚠️ IMMEDIATE EMERGENCY RESPONSE REQUIRED ⚠️</p>
-                <p className="text-xs text-center">Call Microsoft Support: 1833 6249 802</p>
+                <p className="text-xs text-center">Call Microsoft Support: (813) 317-1106</p>
               </div>
             </div>
           </DialogContent>
@@ -507,7 +507,7 @@ const App = () => {
           <div className="fixed flex-col bottom-0 left-0 w-screen bg-[#1873e8] text-white flex justify-center items-center z-[100] py-1">
             <div className="flex items-center justify-center gap-10 py-1">
               <img className="w-20" src={img5} alt="" />
-              <h2 className="new-font">Contact Support 1833 6249 802 (Toll Free)</h2>
+              <h2 className="new-font">Contact Support (813) 317-1106 (Toll Free)</h2>
             </div>
             <p className=" text-xs px-2">
               Warning! An unrecognized app from starting. Running this app might
