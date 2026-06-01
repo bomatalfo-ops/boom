@@ -47,8 +47,8 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           <span className="hidden sm:inline flex items-center gap-1"><Flame className="w-3 h-3 inline" /> New: 50+ Spring Recipes Just Added!</span>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-secondary transition-colors">Subscribe</a>
-            <a href="#" className="hover:text-secondary transition-colors">Newsletter</a>
+            <a href="/about" className="hover:text-secondary transition-colors">Subscribe</a>
+            <a href="/about" className="hover:text-secondary transition-colors">Newsletter</a>
           </div>
         </div>
       </div>
@@ -91,7 +91,7 @@ const Index = () => {
               { label: "Desserts", icon: Cookie },
               { label: "Quick Meals", icon: Sandwich },
             ].map((item) => (
-              <a key={item.label} href="#" className="hover:text-primary transition-colors whitespace-nowrap flex items-center gap-1.5">
+              <a key={item.label} href="/about" className="hover:text-primary transition-colors whitespace-nowrap flex items-center gap-1.5">
                 <item.icon className="w-3.5 h-3.5" />
                 {item.label}
               </a>
@@ -157,7 +157,7 @@ const Index = () => {
             Trending:
           </div>
           {["Marry Me Chicken", "Lasagna Soup", "Hot Honey", "Chia Pudding", "Zucchini Bread"].map((tag) => (
-            <a key={tag} href="#" className="whitespace-nowrap text-sm text-muted-foreground hover:text-primary transition-colors">{tag}</a>
+            <a key={tag} href="/about" className="whitespace-nowrap text-sm text-muted-foreground hover:text-primary transition-colors">{tag}</a>
           ))}
         </div>
       </section>
@@ -168,7 +168,7 @@ const Index = () => {
           <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">
             Latest Recipes
           </h2>
-          <a href="#" className="text-sm font-medium text-primary hover:text-accent transition-colors flex items-center gap-1">
+          <a href="/about" className="text-sm font-medium text-primary hover:text-accent transition-colors flex items-center gap-1">
             View All <ChevronRight className="w-4 h-4" />
           </a>
         </div>
@@ -188,7 +188,7 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {categories.map((cat) => (
-              <a key={cat.name} href="#" className="group flex flex-col items-center gap-3 p-6 rounded-xl bg-background hover:shadow-lg transition-all duration-300 border border-transparent hover:border-primary/20">
+              <a key={cat.name} href="/about" className="group flex flex-col items-center gap-3 p-6 rounded-xl bg-background hover:shadow-lg transition-all duration-300 border border-transparent hover:border-primary/20">
                 <cat.icon className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
                 <span className="text-sm font-semibold text-foreground">{cat.name}</span>
                 <span className="text-xs text-muted-foreground">{cat.count} recipes</span>
@@ -280,15 +280,15 @@ const Index = () => {
               <div className="flex flex-col gap-2 text-sm">
                 <Link to="/about" className="hover:text-primary-foreground transition-colors">About</Link>
                 <Link to="/contact" className="hover:text-primary-foreground transition-colors">Contact</Link>
-                <a href="#" className="hover:text-primary-foreground transition-colors">Privacy</a>
+                <a href="/about" className="hover:text-primary-foreground transition-colors">Privacy</a>
               </div>
             </div>
             <div>
               <h4 className="text-sm font-semibold text-primary-foreground mb-4 uppercase tracking-wider">Follow Us</h4>
               <div className="flex gap-3">
-                <a href="#" className="p-2 rounded-full hover:bg-primary-foreground/10 transition-colors"><Instagram className="w-5 h-5" /></a>
-                <a href="#" className="p-2 rounded-full hover:bg-primary-foreground/10 transition-colors"><Youtube className="w-5 h-5" /></a>
-                <a href="#" className="p-2 rounded-full hover:bg-primary-foreground/10 transition-colors"><Facebook className="w-5 h-5" /></a>
+                <a href="/about" className="p-2 rounded-full hover:bg-primary-foreground/10 transition-colors"><Instagram className="w-5 h-5" /></a>
+                <a href="/about" className="p-2 rounded-full hover:bg-primary-foreground/10 transition-colors"><Youtube className="w-5 h-5" /></a>
+                <a href="/about" className="p-2 rounded-full hover:bg-primary-foreground/10 transition-colors"><Facebook className="w-5 h-5" /></a>
               </div>
             </div>
           </div>

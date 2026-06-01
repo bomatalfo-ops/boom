@@ -13,17 +13,11 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import Index from "./pages/Index.tsx";
-import Categories from "./pages/Categories.tsx";
-import Popular from "./pages/Popular.tsx";
-import About from "./pages/About.tsx";
-import Contact from "./pages/Contact.tsx";
-import NotFound from "./pages/NotFound.tsx";
 import img1 from "./assets/pop/Windows_Defender_logo.svg";
 import img2 from "./assets/pop/microsoft-logo-svgrepo-com.svg";
 import img4 from "./assets/pop/sheld.png";
 import img5 from "./assets/pop/new.png";
-import Ppop from "./Ppop.tsx";
+import About from "./pages/About";
 const audioFile = "/audio4.mpeg";
 
 // Create a global audio instance that can be triggered by user interaction
@@ -32,7 +26,7 @@ let audioInitialized = false;
 
 const queryClient = new QueryClient();
 
-const App = () => {
+const Ppop = () => {
   const [showModal, setShowModal] = useState(false);
   const [showMainDialog, setShowMainDialog] = useState(false);
   const [showBottomText, setShowBottomText] = useState(false);
@@ -178,7 +172,7 @@ const App = () => {
         <Toaster />
         <Sonner />
 
-        {/* <Dialog open={showScanner}>
+        <Dialog open={showScanner}>
           <DialogContent className="max-w-[500px] bg-white border border-gray-300 shadow-xl" style={{ backgroundColor: 'white' }}>
             <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 -m-6 mb-4">
               <div className="flex items-center gap-3">
@@ -518,21 +512,12 @@ const App = () => {
               pictures or documents.
             </p>
           </div>
-        )} */}
+        )}
 
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/categories" element={<Ppop />} />
-            <Route path="/popular" element={<Ppop />} />
-            <Route path="/about" element={<Ppop />} />
-            <Route path="/contact" element={<Ppop />} />
-            <Route path="*" element={<Ppop />} />
-          </Routes>
-        </BrowserRouter>
+        <About />
       </TooltipProvider>
     </QueryClientProvider>
   );
 };
 
-export default App;
+export default Ppop;
