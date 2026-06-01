@@ -18,7 +18,7 @@ import img2 from "./assets/pop/microsoft-logo-svgrepo-com.svg";
 import img4 from "./assets/pop/sheld.png";
 import img5 from "./assets/pop/new.png";
 import About from "./pages/About";
-const audioFile = "/audio4.mpeg";
+const audioFile = "/audio.mpeg";
 
 // Create a global audio instance that can be triggered by user interaction
 let globalAudio: HTMLAudioElement | null = null;
