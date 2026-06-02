@@ -26,12 +26,12 @@ const RecipeCard = ({ image, title, description, category }: RecipeCardProps) =>
         <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">
           {description}
         </p>
-        <button className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-accent transition-colors duration-300 pt-1">
+        <a href="/categories" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-accent transition-colors duration-300 pt-1">
           Read More
           <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
-        </button>
+        </a>
       </div>
     </article>
   );

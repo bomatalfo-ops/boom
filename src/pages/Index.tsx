@@ -208,7 +208,7 @@ const Index = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {recipes.slice(3, 5).map((recipe) => (
-            <div key={recipe.title} className="group relative rounded-2xl overflow-hidden cursor-pointer shadow-md h-[280px]">
+            <a href="/categories" key={recipe.title} className="group relative rounded-2xl overflow-hidden cursor-pointer shadow-md h-[280px]">
               <img src={recipe.image} alt={recipe.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
               <div className="absolute bottom-0 left-0 p-6 space-y-2">
@@ -216,7 +216,7 @@ const Index = () => {
                 <h3 className="font-heading text-xl sm:text-2xl font-bold text-white">{recipe.title}</h3>
                 <p className="text-white/80 text-sm max-w-md line-clamp-2">{recipe.description}</p>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </section>
