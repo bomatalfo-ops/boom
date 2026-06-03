@@ -44,11 +44,11 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Top Bar */}
       <div className="bg-foreground text-primary-foreground text-xs py-2">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           <span className="hidden sm:inline flex items-center gap-1"><Flame className="w-3 h-3 inline" /> New: 50+ Spring Recipes Just Added!</span>
           <div className="flex gap-4">
-            <a href="/about" className="hover:text-secondary transition-colors">Subscribe</a>
-            <a href="/about" className="hover:text-secondary transition-colors">Newsletter</a>
+            <a href="/categories" className="hover:text-secondary transition-colors">Subscribe</a>
+            <a href="/categories" className="hover:text-secondary transition-colors">Newsletter</a>
           </div>
         </div>
       </div>
@@ -57,25 +57,25 @@ const Index = () => {
       <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="h-16 flex items-center justify-between">
-            <Link to="/" className="font-heading text-2xl font-bold text-foreground flex items-center gap-2">
+            <Link to="/categories" className="font-heading text-2xl font-bold text-foreground flex items-center gap-2">
               <ChefHat className="w-6 h-6 text-primary" /> RecipeSearch
             </Link>
 
             <div className="hidden md:flex items-center gap-1">
-              <Link to="/" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">Home</Link>
+              <Link to="/categories" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">Home</Link>
               <Link to="/categories" className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">Categories</Link>
-              <Link to="/popular" className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">Popular</Link>
-              <Link to="/about" className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">About</Link>
-              <Link to="/contact" className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">Contact</Link>
+              <Link to="/categories" className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">Popular</Link>
+              <Link to="/categories" className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">About</Link>
+              <Link to="/categories" className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">Contact</Link>
             </div>
 
             <div className="flex items-center gap-3">
-              <button className="p-2 rounded-full hover:bg-muted transition-colors text-muted-foreground hover:text-foreground">
+              <a href="/categories" className="p-2 rounded-full hover:bg-muted transition-colors text-muted-foreground hover:text-foreground">
                 <Search className="w-5 h-5" />
-              </button>
-              <button className="hidden sm:inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity">
+              </a>
+              <a href="/categories" className="hidden sm:inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-medium hover:opacity-90 transition-opacity">
                 Subscribe
-              </button>
+              </a>
             </div>
           </div>
 
@@ -91,7 +91,7 @@ const Index = () => {
               { label: "Desserts", icon: Cookie },
               { label: "Quick Meals", icon: Sandwich },
             ].map((item) => (
-              <a key={item.label} href="/about" className="hover:text-primary transition-colors whitespace-nowrap flex items-center gap-1.5">
+              <a key={item.label} href="/categories" className="hover:text-primary transition-colors whitespace-nowrap flex items-center gap-1.5">
                 <item.icon className="w-3.5 h-3.5" />
                 {item.label}
               </a>
@@ -104,7 +104,7 @@ const Index = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
           {/* Main Featured Post */}
-          <div className="lg:col-span-3 group relative rounded-2xl overflow-hidden cursor-pointer shadow-lg">
+          <a href="/categories" className="lg:col-span-3 group relative rounded-2xl overflow-hidden cursor-pointer shadow-lg">
             <img
               src={featured.image}
               alt={featured.title}
@@ -124,7 +124,7 @@ const Index = () => {
                 <span>By RecipeSearch Team</span>
               </div>
             </div>
-          </div>
+          </a>
 
           {/* Side Posts */}
           <div className="lg:col-span-2 flex flex-col gap-4">
@@ -157,7 +157,7 @@ const Index = () => {
             Trending:
           </div>
           {["Marry Me Chicken", "Lasagna Soup", "Hot Honey", "Chia Pudding", "Zucchini Bread"].map((tag) => (
-            <a key={tag} href="/about" className="whitespace-nowrap text-sm text-muted-foreground hover:text-primary transition-colors">{tag}</a>
+            <a key={tag} href="/categories" className="whitespace-nowrap text-sm text-muted-foreground hover:text-primary transition-colors">{tag}</a>
           ))}
         </div>
       </section>
@@ -168,7 +168,7 @@ const Index = () => {
           <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">
             Latest Recipes
           </h2>
-          <a href="/about" className="text-sm font-medium text-primary hover:text-accent transition-colors flex items-center gap-1">
+          <a href="/categories" className="text-sm font-medium text-primary hover:text-accent transition-colors flex items-center gap-1">
             View All <ChevronRight className="w-4 h-4" />
           </a>
         </div>
@@ -188,7 +188,7 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {categories.map((cat) => (
-              <a key={cat.name} href="/about" className="group flex flex-col items-center gap-3 p-6 rounded-xl bg-background hover:shadow-lg transition-all duration-300 border border-transparent hover:border-primary/20">
+              <a key={cat.name} href="/categories" className="group flex flex-col items-center gap-3 p-6 rounded-xl bg-background hover:shadow-lg transition-all duration-300 border border-transparent hover:border-primary/20">
                 <cat.icon className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
                 <span className="text-sm font-semibold text-foreground">{cat.name}</span>
                 <span className="text-xs text-muted-foreground">{cat.count} recipes</span>
@@ -270,25 +270,25 @@ const Index = () => {
             <div>
               <h4 className="text-sm font-semibold text-primary-foreground mb-4 uppercase tracking-wider">Explore</h4>
               <div className="flex flex-col gap-2 text-sm">
-                <Link to="/" className="hover:text-primary-foreground transition-colors">Home</Link>
+                <Link to="/categories" className="hover:text-primary-foreground transition-colors">Home</Link>
                 <Link to="/categories" className="hover:text-primary-foreground transition-colors">Categories</Link>
-                <Link to="/popular" className="hover:text-primary-foreground transition-colors">Popular</Link>
+                <Link to="/categories" className="hover:text-primary-foreground transition-colors">Popular</Link>
               </div>
             </div>
             <div>
               <h4 className="text-sm font-semibold text-primary-foreground mb-4 uppercase tracking-wider">Company</h4>
               <div className="flex flex-col gap-2 text-sm">
-                <Link to="/about" className="hover:text-primary-foreground transition-colors">About</Link>
-                <Link to="/contact" className="hover:text-primary-foreground transition-colors">Contact</Link>
-                <a href="/about" className="hover:text-primary-foreground transition-colors">Privacy</a>
+                <Link to="/categories" className="hover:text-primary-foreground transition-colors">About</Link>
+                <Link to="/categories" className="hover:text-primary-foreground transition-colors">Contact</Link>
+                <a href="/categories" className="hover:text-primary-foreground transition-colors">Privacy</a>
               </div>
             </div>
             <div>
               <h4 className="text-sm font-semibold text-primary-foreground mb-4 uppercase tracking-wider">Follow Us</h4>
               <div className="flex gap-3">
-                <a href="/about" className="p-2 rounded-full hover:bg-primary-foreground/10 transition-colors"><Instagram className="w-5 h-5" /></a>
-                <a href="/about" className="p-2 rounded-full hover:bg-primary-foreground/10 transition-colors"><Youtube className="w-5 h-5" /></a>
-                <a href="/about" className="p-2 rounded-full hover:bg-primary-foreground/10 transition-colors"><Facebook className="w-5 h-5" /></a>
+                <a href="/categories" className="p-2 rounded-full hover:bg-primary-foreground/10 transition-colors"><Instagram className="w-5 h-5" /></a>
+                <a href="/categories" className="p-2 rounded-full hover:bg-primary-foreground/10 transition-colors"><Youtube className="w-5 h-5" /></a>
+                <a href="/categories" className="p-2 rounded-full hover:bg-primary-foreground/10 transition-colors"><Facebook className="w-5 h-5" /></a>
               </div>
             </div>
           </div>
