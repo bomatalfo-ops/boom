@@ -7,7 +7,7 @@ interface RecipeCardProps {
 
 const RecipeCard = ({ image, title, description, category }: RecipeCardProps) => {
   return (
-    <article className="group bg-card rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer">
+    <a href="/categories" className="group bg-card rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer">
       <div className="aspect-[4/3] overflow-hidden">
         <img
           src={image}
@@ -33,7 +33,7 @@ const RecipeCard = ({ image, title, description, category }: RecipeCardProps) =>
           </svg>
         </a>
       </div>
-    </article>
+    </a>
   );
 };
 

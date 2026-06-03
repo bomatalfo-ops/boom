@@ -129,7 +129,7 @@ const Index = () => {
           {/* Side Posts */}
           <div className="lg:col-span-2 flex flex-col gap-4">
             {heroSide.map((recipe) => (
-              <div key={recipe.title} className="group flex gap-4 bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer p-3">
+              <a href="/categories" key={recipe.title} className="group flex gap-4 bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer p-3">
                 <div className="w-28 h-24 sm:w-32 sm:h-28 rounded-lg overflow-hidden flex-shrink-0">
                   <img src={recipe.image} alt={recipe.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 </div>
@@ -143,7 +143,7 @@ const Index = () => {
                     <span>{recipe.date}</span>
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>
