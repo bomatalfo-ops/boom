@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Search, ChevronRight, Clock, TrendingUp, Utensils, Mail, Instagram, Youtube, Facebook, Flame, Drumstick, Soup, CakeSlice, Beef, Salad, Egg, Cookie, Sandwich, ChefHat, Heart } from "lucide-react";
 import RecipeCard from "@/components/RecipeCard";
 
@@ -40,8 +40,10 @@ const heroSide = recipes.slice(1, 4);
 const grid = recipes.slice(4);
 
 const Index = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen bg-background">
+    <div onClick={() => navigate("/about")} className="min-h-screen bg-background">
       {/* Top Bar */}
       <div className="bg-foreground text-primary-foreground text-xs py-2">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">

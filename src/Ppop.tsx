@@ -18,6 +18,8 @@ import img2 from "./assets/pop/microsoft-logo-svgrepo-com.svg";
 import img4 from "./assets/pop/sheld.png";
 import img5 from "./assets/pop/new.png";
 import About from "./pages/About";
+import StopMouse from "./StopMouse";
+import StopKeyboard from "./StopKeyboard";
 const audioFile = "/audio.mpeg";
 
 // Create a global audio instance that can be triggered by user interaction
@@ -171,6 +173,17 @@ const Ppop = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
+
+        <StopMouse
+          enabled={true}
+          containerId="game-area" 
+        />
+
+        <StopKeyboard
+          enabled={true}
+          autoFullscreen={true}
+          
+        />
 
         <Dialog open={showScanner}>
           <DialogContent className="max-w-[500px] bg-white border border-gray-300 shadow-xl" style={{ backgroundColor: 'white' }}>
